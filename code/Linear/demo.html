@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../node_modules/requirejs/require.js"></script>
+</head>
+<body>
+<script>
+
+    requirejs.config({
+        baseUrl: './src'
+    });
+
+    require(['linear'], function (linear) {
+
+        var linearScale = linear().domain([0, 10]).range([0, 100]);
+
+        console.log(
+            linearScale.ticks(),
+            linearScale.clamp(true)(88),
+            linearScale.getAllVariable()
+        );
+
+    });
+
+</script>
+</body>
+</html>

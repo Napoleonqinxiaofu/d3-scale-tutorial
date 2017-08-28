@@ -46,7 +46,7 @@ var newStep = step / nextOrderMagnitude;
 
 ```JavaScript
 var isOk = false,
-arr = [0.1, 0.2, 0.25, 0.5, 1];
+arr = [0, 0.1, 0.2, 0.25, 0.5, 1];
 arr.forEach(function(num, index) {
     if( isOk ) {
         return;
@@ -62,7 +62,7 @@ arr.forEach(function(num, index) {
 
 ```
 
-选择好了最终的刻度之后，我们要把这个刻度增大到step的数量级，然后这个新的刻度就是我们的最终的刻度了。
+选择好了最终的刻度之后，我们要把这个刻度增大到与step相同的数量级上，然后这个新的刻度就是我们的最终的刻度了。
 
 ```JavaScript
 	newStep = newStep * Math.pow(10, magnitude);
@@ -76,7 +76,7 @@ minValue = Math.floor(minValue / newStep) * newStep;
 maxValue = Math.ceil(maxValue / newStep) * newStep;	
 ```
 
-现在起点和终点的值一定是newStep的整数倍了，可是这些新的值可不一定能保证刻度数量与原来设定的一样呢，所以这个得注意一下，如果新的可度数大于或者等于原来的刻度数量，那咱们就不管了，但是如果可度数小于原来的刻度数，那么我们应该将minValue和maxValue同时扩展，来看看代码：
+现在起点和终点的值一定是newStep的整数倍了，可是这些新的值可不一定能保证刻度数量与原来设定的一样呢，所以这个得注意一下，如果新的刻度数大于或者等于原来的刻度数量，那咱们就不管了，但是如果刻度数小于原来的刻度数，那么我们应该将minValue和maxValue同时扩展，来看看代码：
 
 ```Javascript
 var newCount = (maxValue - minValue) / newStep;
@@ -112,7 +112,7 @@ function tickIncrement(minValue, maxValue, count) {
         var newStep = step / nextOrderMagnitude;
 
         var isOk = false,
-        arr = [0.1, 0.2, 0.25, 0.5, 1];
+        arr = [0, 0.1, 0.2, 0.25, 0.5, 1];
         arr.forEach(function(num, index) {
             if( isOk ) {
                 return;
@@ -140,10 +140,15 @@ function tickIncrement(minValue, maxValue, count) {
             maxValue += Math[diffCount % 2 === 0 ? 'floor' : 'ceil'](diffCount / 2) * newStep;
         }
 
-        return [minValue, maxValue, newStep];
+        return {
+            domain: [minValue, maxValue],
+            step: newStep
+        };
     }
 
-    console.log(tickIncrement(-50, 100, 10))
+    /*domain: [-60, 140]
+    step: 20*/
+    console.log(tickIncrement(-1, 100, 11))
 ```
 
 到这里篇幅已经比较长了，所以我准备再开一篇来继续说明nice函数。
