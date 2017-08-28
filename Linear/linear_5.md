@@ -40,3 +40,7 @@ function ticks(count) {
 ```
 
 具体的代码可以前往这里查看，[GO](../code/Linear)
+
+[Prev](./linear_4.md)
+
+[Next](./d3_linear_1.md)
