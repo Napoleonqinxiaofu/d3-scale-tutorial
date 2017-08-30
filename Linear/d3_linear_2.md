@@ -130,6 +130,6 @@ linearish函数接受的scale就类似于上面的scale函数，它的函数对�
 
 另外还有四个函数来自于continuous.js——default as continuous, copy, deinterpolateLinear as deinterpolate，现在暂时不介绍这些代码，因为一会儿我们的重点就在continuous.js文件里，而且这一篇就够多的了，我们再开一篇来介绍continuous.js的内容（我估计一篇不够）。
 
-[Prev](d3_linear_3.md)
+[Prev](d3_linear_1.md)
 
-[Next](d3_linear_1.md)
+[Next](d3_linear_3.md)

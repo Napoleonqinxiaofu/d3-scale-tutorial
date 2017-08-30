@@ -152,4 +152,48 @@ export function (a, b) {
 </script>
 ```
 
-够简单吧，这两个数值插值器我们清楚了之后，我们得来看一下bimap是怎么回事儿了。
+够简单吧，这两个数值插值器我们清楚了之后，我们得来看一下bimap是怎么回事儿了。bimap函数与continuous函数同触一个文件内。
+
+```Javascript
+<script>
+function bimap(domain, range, deinterpolate, reinterpolate) {
+    var d0 = domain[0], d1 = domain[1],
+        r0 = range[0], r1 = range[1];
+
+    // 这里不用判断也是可以的吧，没有什么关系的
+    if (d1 < d0) {
+        d0 = deinterpolate(d1, d0);
+        r0 = reinterpolate(r1, r0);
+    }
+    else {
+        d0 = deinterpolate(d0, d1);
+        r0 = reinterpolate(r0, r1);
+    }
+    return function (x) {
+        return r0(d0(x));
+    };
+}
+</script>
+```
+
+bimap接受四个参数，前两个参数分别是domain和range，也就是我们定义或者传递进去的定义域和值域，我们现在可以理解到，deinterpolate函数最终返回一个函数，这个函数可以接受一个domain上的值（假设为x），如果我们执行这个返回的函数，会得到x在domain区间上的比例，如果我们传递的x是在domain区间上的值，那么得到的值将会是[0, 1]之间的值（t）。reinterpolate函数返回的也是一个函数，该函数正好接受一个比例值，并且返回的是值域在这个比例下的值，总之，调用d0函数会得到一个比例值，把这个比例值传递给d1函数，最终会得到值域上该比例的值。说这么拗口，我都蒙了，我们来写一个简略版的bimap，只接受domian和range两个参数。
+
+```Javascript
+<script>
+    function bimap(domain, range) {
+       var d0 = domain[0], d1 = domain[1],
+           r0 = range[0], r1 = range[1];
+
+       return function(x) {
+            var t = (x - d0) / (d1 - d0);
+            return r0 + t * (r1 - r0);
+       }
+   }
+</script>
+```
+
+好了，这一篇也够长的，我们再前往下一篇来继续说明linear比例尺。
+
+[Prev](d3_linear_2.md)
+
+[Next](d3_linear_4.md)
