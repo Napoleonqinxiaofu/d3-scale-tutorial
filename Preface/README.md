@@ -24,11 +24,7 @@
 
 + Linear线性比例尺的实现
 
-+ Log、Pow比例尺
-
-+ quantize比例尺
-
-+ ordinal序数比例尺
++ Log比例尺
 
 + 结合canvas与d3-scale写一个线段生成器（不明白什么是线段生成器，到时候就知道了）
 
